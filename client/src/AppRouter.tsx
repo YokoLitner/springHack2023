@@ -4,19 +4,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
-import { Error, Login, Registration } from 'pages/EXPORT'
+import { Chat, Error, Login, Registration } from 'pages/EXPORT'
 
 // types
 import { IRoute } from 'types/routes'
 
 export const privateRouter = [
   {
-    path: '/chat'
-    // element: <Chat />,
+    path: '/chat',
+    element: <Chat />
   },
   {
-    path: '/chat/:id'
-    // element: <ChatPage />,
+    path: '/chat/:id',
+    element: <Chat />
   },
   {
     path: '/profile'
@@ -58,7 +58,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(!user ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(user ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>
