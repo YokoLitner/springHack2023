@@ -7,3 +7,5 @@ export interface IIconProps extends SVGProps<SVGSVGElement> {
 }
 
 export { default as LoadingIcon } from './LoadingIcon'
+export { default as KebabMenuIcon } from './KebabMenuIcon'
+export { default as PaperClipIcon } from './PaperClipIcon'
