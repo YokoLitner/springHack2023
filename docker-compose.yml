@@ -1,0 +1,24 @@
+version: '3'
+services:
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - "./client:/client"
+    command: sh -c "yarn && yarn dev"
+    # command: "tail -f /dev/null"
+  server: 
+    container_name: server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./server:/server"
+    command: sh -c "yarn && yarn start:dev"
+    # command: "tail -f /dev/null"
