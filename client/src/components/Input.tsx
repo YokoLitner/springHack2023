@@ -20,7 +20,7 @@ export interface InputProps {
 const Input: React.FC<InputProps> = props => {
   const {
     value,
-    className,
+    className = '',
     containerClassName,
     label,
     onChange,

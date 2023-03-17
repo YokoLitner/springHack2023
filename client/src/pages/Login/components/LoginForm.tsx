@@ -35,21 +35,18 @@ const LoginForm = () => {
         <Controller
           name="email"
           control={control}
-          render={({ field: { onChange, value }, fieldState: { error } }) => {
-            console.log(error)
-            return (
-              <Input
-                name="email"
-                value={value}
-                onChange={onChange}
-                error={!!error}
-                errorMessage={error?.message}
-                containerClassName="mb-3 w-full"
-                label="Почта"
-                placeholder="email"
-              />
-            )
-          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <Input
+              name="email"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              errorMessage={error?.message}
+              containerClassName="mb-3 w-full"
+              label="Почта"
+              placeholder="email"
+            />
+          )}
         />
         <div className={cls('flex items-center w-fit mt-4', errors.email ? 'mb-7' : 'mb-2')}>@gmail.com</div>
       </div>
