@@ -16,9 +16,31 @@ services:
     build:
       context: .
       dockerfile: ./server/Dockerfile
+    networks:
+      - postgres
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     volumes:
       - "./server:/server"
     command: sh -c "yarn && yarn start:dev"
     # command: "tail -f /dev/null"
+  database:
+    image: postgres:15.2-alpine
+    container_name: db
+    networks:
+      - postgres
+    volumes:
+      - ./data/_postgres:/data/postgres
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 5432:5432
+
+networks:
+  postgres:
+    driver: bridge
+  
