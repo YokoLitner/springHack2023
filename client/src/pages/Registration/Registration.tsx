@@ -1,7 +1,13 @@
+// components
+import RegistrationForm from './components/RegistrationForm'
+
 const Registration = () => {
   return (
     <div className="flex h-screen items-center">
-      <h1>Registration</h1>
+      <div className="mx-auto w-[450px] border rounded-xl p-12 h-fit shadow-md">
+        <div className="text-center font-medium text-3xl my-5">Регистрация</div>
+        <RegistrationForm />
+      </div>
     </div>
   )
 }
