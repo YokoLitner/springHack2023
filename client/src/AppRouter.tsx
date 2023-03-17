@@ -4,13 +4,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
-import { Error } from 'pages/EXPORT'
+import { Error, Login, Registration } from 'pages/EXPORT'
 
-//TODO add IRoute
+// types
+import { IRoute } from 'types/routes'
 
 export const privateRouter = [
   {
-    path: '/'
+    path: '/chat'
     // element: <Chat />,
   },
   {
@@ -31,14 +32,14 @@ export const privateRouter = [
   }
 ]
 
-export const publicRouter = [
+export const publicRouter: IRoute[] = [
   {
-    path: '/'
-    // element: <Register />,
+    path: '/',
+    element: <Registration />
   },
   {
-    path: '/login'
-    // element: <Login />,
+    path: '/login',
+    element: <Login />
   },
   {
     path: '*',
@@ -57,7 +58,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(user ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(!user ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>
