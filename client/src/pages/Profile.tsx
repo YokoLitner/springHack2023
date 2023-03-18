@@ -64,6 +64,8 @@ const Profile = () => {
 
   const onSubmit = (data: any) => console.log(data)
 
+  const changeAvatar = () => console.log('avatar changed')
+
   return (
     <div className="flex flex-row h-screen max-[960px]:h-full">
       <div
@@ -76,8 +78,11 @@ const Profile = () => {
         <div onClick={goBack} className="hidden mr-[80%] p-5 max-[639px]:block">
           <ArrowIcon width="35px" className="rotate-180 fill-blue-600 hidden max-[639px]:block" />
         </div>
-        <div className="sm:w-[550px] w-64 ">
-          <div className="w-[100px] h-[100px] rounded-full bg-gray-300 mx-auto mb-4" />
+        <div className="sm:w-[550px] w-64">
+          <div
+            onClick={changeAvatar}
+            className="w-[100px] h-[100px] rounded-full bg-gray-300 mx-auto mb-4 cursor-pointer"
+          />
           <div className="font-semibold text-3xl text-center mb-4">{name}</div>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">

@@ -34,13 +34,11 @@ const ChatScreen = () => {
           <Link to="/" className="block p-5 sm:hidden">
             <ArrowIcon width="35px" className="rotate-180 fill-blue-600" />
           </Link>
-          <div className="flex flex-row items-center cursor-pointer">
+          <Link to={`/profile/${0}`} className="flex flex-row items-center cursor-pointer">
             <div className="w-[50px] h-[50px] rounded-full bg-gray-300" />
             {/* TODO create mocked chats and link */}
-            <Link to={`/profile/${0}`} className="text-lg font-semibold ml-4">
-              Чат продаж
-            </Link>
-          </div>
+            <div className="text-lg font-semibold ml-4">Чат продаж</div>
+          </Link>
         </div>
         {/* <KebabMenuIcon width="20px" className="fill-blue-600 cursor-pointer ml-auto" /> */}
       </div>
