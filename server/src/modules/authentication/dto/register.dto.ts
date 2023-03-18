@@ -1,4 +1,5 @@
 import { IsEmail, IsString, IsNotEmpty, MinLength } from 'class-validator';
+import Role from 'src/modules/user/types/role.enum';
 
 export class RegisterDto {
   @IsEmail()
@@ -6,7 +7,7 @@ export class RegisterDto {
 
   @IsString()
   @IsNotEmpty()
-  fullName: string;
+  fullname: string;
 
   @IsString()
   @IsNotEmpty()
@@ -14,10 +15,13 @@ export class RegisterDto {
   password: string;
 
   @IsString()
-  department: string;
+  department?: string;
 
   @IsString()
-  jobTitle: string;
+  position?: string;
+
+  @IsString()
+  access_level?: Role = Role.User;
 }
 
 export default RegisterDto;
