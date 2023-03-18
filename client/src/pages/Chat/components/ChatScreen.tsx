@@ -36,10 +36,13 @@ const ChatScreen = () => {
           </Link>
           <div className="flex flex-row items-center cursor-pointer">
             <div className="w-[50px] h-[50px] rounded-full bg-gray-300" />
-            <div className="text-lg font-semibold ml-4">Чат продаж</div>
+            {/* TODO create mocked chats and link */}
+            <Link to={`/profile/${0}`} className="text-lg font-semibold ml-4">
+              Чат продаж
+            </Link>
           </div>
         </div>
-        <KebabMenuIcon width="20px" className="fill-blue-600 cursor-pointer ml-auto" />
+        {/* <KebabMenuIcon width="20px" className="fill-blue-600 cursor-pointer ml-auto" /> */}
       </div>
       <div className="overflow-y-auto align-bottom flex flex-col justify-end h-4/5 mb-4">
         <div className="w-full text-gray-400 text-center">20 апреля</div>

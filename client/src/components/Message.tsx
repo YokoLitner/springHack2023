@@ -1,9 +1,12 @@
 import { FC, memo, useMemo } from 'react'
 
-//types
+import cls from 'classnames'
+
+// types
 import { IMessage } from 'types/EXPORT'
 
-import cls from 'classnames'
+// utils
+import getFormatedTime from 'utils/getFormatedTime'
 
 export interface IMessageProps {
   message: IMessage
@@ -30,8 +33,9 @@ const Message: FC<IMessageProps> = props => {
       )}
     >
       <div>{content}</div>
-      {/* TODO create time validation */}
-      <div className={cls('text-xs self-end ml-1', isCurrent ? 'text-blue-500' : 'text-gray-400')}>18:42</div>
+      <div className={cls('text-xs self-end ml-1', isCurrent ? 'text-blue-500' : 'text-gray-400')}>
+        {getFormatedTime(created_at)}
+      </div>
     </div>
   )
 }

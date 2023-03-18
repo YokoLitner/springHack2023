@@ -5,6 +5,7 @@ import cls from 'classnames'
 
 // types
 import { IChat } from 'types/EXPORT'
+import getFormatedTime from 'utils/getFormatedTime'
 
 const mockedChats: IChat[] = [
   {
@@ -102,7 +103,8 @@ const Chats: FC = () => {
             </div>
           </div>
           <div className="flex flex-col ml-auto justify-between pl-4">
-            <div className="text-gray-400 text-xs">18:42</div>
+            <div className="text-gray-400 text-xs">{getFormatedTime(messages[0].created_at)}</div>
+            {/* TODO fix unread messages */}
             {true && (
               <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex justify-center items-center">{5}</div>
             )}
