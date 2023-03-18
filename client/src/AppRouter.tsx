@@ -4,15 +4,24 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
+<<<<<<< Updated upstream
 import { Chat, Error, Login, Profile, Registration } from 'pages/EXPORT'
+=======
+import { Error, Home, Login, Registration } from 'pages/EXPORT'
+>>>>>>> Stashed changes
 
 // types
 import { IRoute } from 'types/routes'
 
 export const privateRouter = [
   {
+<<<<<<< Updated upstream
     path: '/chat',
     element: <Chat />
+=======
+    path: '/',
+    element: <Home />
+>>>>>>> Stashed changes
   },
   {
     path: '/chat/:id',

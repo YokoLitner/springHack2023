@@ -8,4 +8,8 @@ export * from './Error'
 export * from './Chat/Chat'
 export * from './Login/Login'
 export * from './Registration/Registration'
+<<<<<<< Updated upstream
 export * from './Profile'
+=======
+export { default as Home } from './Home/Home'
+>>>>>>> Stashed changes
