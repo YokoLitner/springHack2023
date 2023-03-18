@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { mockedChats } from './Chats'
+import SendBlock from './SendBlock'
 
 // components
 import { Message } from 'components/EXPORT'
@@ -7,26 +10,16 @@ import { Message } from 'components/EXPORT'
 import { ArrowIcon, KebabMenuIcon, PaperClipIcon } from 'assets/icons/EXPORT'
 
 // types
-import { IMessage } from 'types/EXPORT'
-
-const mockMessages: IMessage[] = [
-  {
-    id: 0,
-    content: 'Как ты себя чувтсвуешь?',
-    created_at: new Date(999999),
-    sender_id: 1,
-    type: 'text'
-  },
-  {
-    id: 1,
-    content: 'Круто!',
-    created_at: new Date(),
-    sender_id: 5,
-    type: 'text'
-  }
-]
+import { IChat } from 'types/EXPORT'
 
 const ChatScreen = () => {
+  const { id = '0' } = useParams<{ id?: string }>()
+  const [chatInfo, setChatInfo] = useState({} as IChat)
+
+  useEffect(() => {
+    setChatInfo(mockedChats[Number(id)])
+  }, [id])
+
   return (
     <div className="h-full p-3 sm:p-8">
       <div className="flex flex-row items-center w-full pb-4 border-b justify-between">
@@ -34,29 +27,20 @@ const ChatScreen = () => {
           <Link to="/" className="block p-5 sm:hidden">
             <ArrowIcon width="35px" className="rotate-180 fill-blue-600" />
           </Link>
-          <Link to={`/profile/${0}`} className="flex flex-row items-center cursor-pointer">
+          <Link to={`/profile/${1}`} className="flex flex-row items-center cursor-pointer">
             <div className="w-[50px] h-[50px] rounded-full bg-gray-300" />
-            {/* TODO create mocked chats and link */}
-            <div className="text-lg font-semibold ml-4">Чат продаж</div>
+            <div className="text-lg font-semibold ml-4">{chatInfo.name}</div>
           </Link>
         </div>
         {/* <KebabMenuIcon width="20px" className="fill-blue-600 cursor-pointer ml-auto" /> */}
       </div>
       <div className="overflow-y-auto align-bottom flex flex-col justify-end h-4/5 mb-4">
         <div className="w-full text-gray-400 text-center">20 апреля</div>
-        {mockMessages.map(msg => (
+        {chatInfo.messages?.map(msg => (
           <Message message={msg} key={msg.id} />
         ))}
       </div>
-      <div className="flex flex-row w-full border-t pt-4">
-        <PaperClipIcon width="30px" onClick={() => null} className="fill-blue-600 cursor-pointer mr-4" />
-        <textarea
-          rows={2}
-          placeholder="Сообщение"
-          className="w-full bg-gray-100 py-2 px-4 rounded-3xl resize-none focus:outline-blue-600"
-        />
-        <ArrowIcon width="40px" onClick={() => null} className="fill-blue-600 cursor-pointer ml-4" />
-      </div>
+      <SendBlock />
     </div>
   )
 }

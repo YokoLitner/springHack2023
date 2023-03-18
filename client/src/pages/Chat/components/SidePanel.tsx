@@ -21,7 +21,7 @@ const SidePanel = () => {
     >
       <div className="pb-5 border-b px-3">
         <input
-          className="w-full mt-5 h-10 bg-gray-200 rounded-lg outline-none px-3 placeholder-shown:text-center"
+          className="w-full h-10 bg-gray-200 rounded-lg outline-none px-3 placeholder-shown:text-center"
           type="text"
           placeholder="Поиск"
           value={search}

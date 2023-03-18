@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,6 +14,7 @@ import { Input } from 'components/EXPORT'
 
 // utils
 import { MAX_LENGTH, MIN_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
+import fetchUserById from 'utils/fetchUserById'
 
 const currentUser = {
   id: 5,
@@ -46,13 +47,24 @@ const schema = yup
 
 const Profile = () => {
   const [isChanging, setIsChanging] = useState(false)
+  const [userInfo, setUserInfo] = useState(currentUser)
+  const params = useParams()
+
+  useEffect(() => {
+    if (Object.entries(params).length !== 0) {
+      fetchUserById(params.id).then(data => {
+        setUserInfo(data)
+      })
+    }
+  }, [params])
+
   const navigate = useNavigate()
   const { handleSubmit, control } = useForm({
-    defaultValues: currentUser,
+    defaultValues: userInfo,
     resolver: yupResolver(schema)
   })
 
-  const name = currentUser.fullname.split(' ')[1]
+  const name = userInfo.fullname.split(' ')[1]
 
   const goBack = () => navigate(-1)
 
@@ -85,7 +97,7 @@ const Profile = () => {
                 <Controller
                   name="fullname"
                   control={control}
-                  defaultValue={currentUser.fullname}
+                  defaultValue={userInfo.fullname}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -97,7 +109,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{currentUser.fullname}</div>
+                <div className="text-gray-400">{userInfo.fullname}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -106,7 +118,7 @@ const Profile = () => {
                 <Controller
                   name="department"
                   control={control}
-                  defaultValue={currentUser.department}
+                  defaultValue={userInfo.department}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -118,7 +130,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{currentUser.department}</div>
+                <div className="text-gray-400">{userInfo.department ?? 'Не выбран'}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -127,7 +139,7 @@ const Profile = () => {
                 <Controller
                   name="position"
                   control={control}
-                  defaultValue={currentUser.position}
+                  defaultValue={userInfo.position}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -139,7 +151,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{currentUser.position}</div>
+                <div className="text-gray-400">{userInfo.position ?? 'Не выбрана'}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -148,7 +160,7 @@ const Profile = () => {
                 <Controller
                   name="access_level"
                   control={control}
-                  defaultValue={currentUser.access_level}
+                  defaultValue={userInfo.access_level}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -160,7 +172,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{currentUser.access_level}</div>
+                <div className="text-gray-400">{userInfo.access_level}</div>
               )}
             </div>
             <div className="w-full pb-2 border-b text-blue-600 font-medium mt-20 flex-row flex">
