@@ -21,10 +21,10 @@ const currentUser = {
 }
 
 const REQUIRED_MSG = 'Это поле обязательно'
-const MIN_LENGTH = (minLength: number) => {
+const MIN_LENGTH = (minLength: number ): [number,string] => {
   return [minLength, `Минимальная длина ${minLength}`]
 }
-const MAX_LENGTH = (maxLength: number) => {
+const MAX_LENGTH = (maxLength: number): [number,string] => {
   return [maxLength, `Максимальная длина ${maxLength}`]
 }
 
