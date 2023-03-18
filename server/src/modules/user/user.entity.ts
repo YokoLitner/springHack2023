@@ -15,10 +15,10 @@ class User {
   public password: string;
 
   @Column()
-  public department?: string;
+  public department: string;
 
   @Column()
-  public jobTitle?: string;
+  public jobTitle: string;
 }
 
 export default User;
