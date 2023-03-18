@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AccessLevels } from 'types/EXPORT'
 
 import * as yup from 'yup'
 
@@ -19,12 +20,32 @@ const currentUser = {
   access_level: 'admin'
 }
 
+const REQUIRED_MSG = 'Это поле обязательно'
+const MIN_LENGTH = (minLength: number) => {
+  return [minLength, `Минимальная длина ${minLength}`]
+}
+const MAX_LENGTH = (maxLength: number) => {
+  return [maxLength, `Максимальная длина ${maxLength}`]
+}
+
 const schema = yup
   .object({
-    fullname: yup.string().required(),
-    department: yup.string().required(),
-    position: yup.string().required(),
-    access_level: yup.string().required()
+    fullname: yup
+      .string()
+      .required(REQUIRED_MSG)
+      .min(...MIN_LENGTH(6))
+      .max(...MAX_LENGTH(60)),
+    department: yup
+      .string()
+      .required(REQUIRED_MSG)
+      .min(...MIN_LENGTH(4))
+      .max(...MAX_LENGTH(60)),
+    position: yup
+      .string()
+      .required(REQUIRED_MSG)
+      .min(...MIN_LENGTH(4))
+      .max(...MAX_LENGTH(60)),
+    access_level: yup.string().required(REQUIRED_MSG).oneOf<AccessLevels>(['admin', 'moderator', 'user'])
   })
   .required()
 

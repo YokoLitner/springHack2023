@@ -1,6 +1,6 @@
 import { IMessage } from './message'
 
-export type AcessLevels = 'admin' | 'moderator' | 'user'
+export type AccessLevels = 'admin' | 'moderator' | 'user'
 
 export interface IChat {
   id: number
@@ -14,6 +14,6 @@ export interface IUser {
   fullname: string
   department: string
   position: string
-  access_level: AcessLevels
+  access_level: AccessLevels
   password?: string
 }
