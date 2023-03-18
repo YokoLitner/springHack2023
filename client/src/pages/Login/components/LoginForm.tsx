@@ -9,7 +9,10 @@ import cls from 'classnames'
 // components
 import { Input } from 'components/EXPORT'
 
-interface ILoginForm {
+// hooks
+import useAuth from 'hooks/useAuth'
+
+export interface ILoginForm {
   email: string
   password: string
 }
@@ -27,7 +30,9 @@ const LoginForm = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit: SubmitHandler<ILoginForm> = data => console.log(data)
+  const { login } = useAuth()
+
+  const onSubmit: SubmitHandler<ILoginForm> = data => login(data)
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>

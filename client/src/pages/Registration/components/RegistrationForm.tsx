@@ -9,7 +9,10 @@ import cls from 'classnames'
 // components
 import { Input } from 'components/EXPORT'
 
-interface IFormInput {
+// hooks
+import useAuth from 'hooks/useAuth'
+
+export interface IRegistrationForm {
   email: string
   fullname: string
   password: string
@@ -29,7 +32,9 @@ const RegistrationForm = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit: SubmitHandler<IFormInput> = data => console.log(data)
+  const { register } = useAuth()
+
+  const onSubmit: SubmitHandler<IRegistrationForm> = data => register(data)
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>

@@ -9,6 +9,9 @@ import { Chat, Error, Login, Profile, Registration, Home } from 'pages/EXPORT'
 // types
 import { IRoute } from 'types/routes'
 
+// hooks
+import useAuth from 'hooks/useAuth'
+
 export const privateRouter = [
   {
     path: '/',
@@ -52,7 +55,7 @@ export const publicRouter: IRoute[] = [
 ]
 
 const AppRouter = () => {
-  const user = false
+  const { isAuth } = useAuth()
   const loading = false
 
   if (loading) {
@@ -62,7 +65,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(user ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>
