@@ -4,7 +4,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
+<<<<<<< Updated upstream
 import { Chat, Error, Home, Login, Profile, Registration } from 'pages/EXPORT'
+=======
+import { Chat, Error, Login, Profile, Registration, Home } from 'pages/EXPORT'
+>>>>>>> Stashed changes
 
 // types
 import { IRoute } from 'types/routes'
