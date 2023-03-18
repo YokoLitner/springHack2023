@@ -1,6 +1,7 @@
-import cls from 'classnames'
 import { FC, memo } from 'react'
 import { IIconProps } from './EXPORT'
+
+import cls from 'classnames'
 
 const LoadingIcon: FC<IIconProps> = props => {
   const { width, className, ...rest } = props

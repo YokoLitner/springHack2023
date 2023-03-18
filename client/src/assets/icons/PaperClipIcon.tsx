@@ -1,9 +1,11 @@
-import cls from 'classnames'
 import { FC, memo } from 'react'
 import { IIconProps } from './EXPORT'
 
+import cls from 'classnames'
+
 const PaperClipIcon: FC<IIconProps> = props => {
   const { width, className, ...rest } = props
+
   return (
     <svg
       className={cls(className)}
