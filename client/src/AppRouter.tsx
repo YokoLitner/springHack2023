@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
-import { Chat, Error, Login, Registration } from 'pages/EXPORT'
+import { Chat, Error, Login, Profile, Registration } from 'pages/EXPORT'
 
 // types
 import { IRoute } from 'types/routes'
@@ -23,8 +23,8 @@ export const privateRouter = [
     // element: <Profile />,
   },
   {
-    path: '/profile/:id'
-    // element: <ProfilePage />
+    path: '/profile/:id',
+    element: <Profile />
   },
   {
     path: '*',
