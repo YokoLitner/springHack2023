@@ -9,7 +9,7 @@ services:
       - ./cfg/nginx/:/etc/nginx/conf.d/
       - ./storage/logs/nginx/:/var/logs/nginx/
     ports:
-      - "80:80"
+      - "433:433"
   client:
     container_name: client
     build:
