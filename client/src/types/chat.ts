@@ -11,6 +11,7 @@ export interface IChat {
 
 export interface IUser {
   id: number
+  email: string
   fullname: string
   department: string
   position: string
