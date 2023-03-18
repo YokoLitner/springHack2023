@@ -11,7 +11,6 @@ const Slider = (slides: { slides: string[] }) => {
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        onSlideChange={() => console.log('slide change')}
         effect={'slide'}
         autoplay={{
           delay: 2500,

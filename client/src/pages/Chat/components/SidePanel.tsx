@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Chats from './Chats'
 import { useParams } from 'react-router-dom'
+import Chats from './Chats'
 import Users from './Users'
 
 import cls from 'classnames'
@@ -15,7 +15,7 @@ const SidePanel = () => {
 
   return (
     <div
-      className={cls('sm:flex flex-col h-screen w-full sm:w-1/4 bg-gray-100 ', {
+      className={cls('sm:flex flex-col h-screen w-full sm:w-1/4 bg-gray-100', {
         hidden: Object.entries(params).length !== 0
       })}
     >

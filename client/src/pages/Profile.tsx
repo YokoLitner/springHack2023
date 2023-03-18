@@ -12,20 +12,15 @@ import { ArrowIcon } from 'assets/icons/EXPORT'
 // components
 import { Input } from 'components/EXPORT'
 
+// utils
+import { MAX_LENGTH, MIN_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
+
 const currentUser = {
   id: 5,
-  fullname: 'Денис Басенко Сергеевич',
+  fullname: 'Басенко Денис Сергеевич',
   department: 'Разработка',
   position: 'Администратор',
   access_level: 'admin'
-}
-
-const REQUIRED_MSG = 'Это поле обязательно'
-const MIN_LENGTH = (minLength: number) => {
-  return [minLength, `Минимальная длина ${minLength}`]
-}
-const MAX_LENGTH = (maxLength: number) => {
-  return [maxLength, `Максимальная длина ${maxLength}`]
 }
 
 const schema = yup
@@ -51,14 +46,13 @@ const schema = yup
 
 const Profile = () => {
   const [isChanging, setIsChanging] = useState(false)
-  const params = useParams()
   const navigate = useNavigate()
   const { handleSubmit, control } = useForm({
     defaultValues: currentUser,
     resolver: yupResolver(schema)
   })
 
-  const name = currentUser.fullname.split(' ')[0]
+  const name = currentUser.fullname.split(' ')[1]
 
   const goBack = () => navigate(-1)
 

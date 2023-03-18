@@ -6,6 +6,7 @@ import { IUser } from 'types/EXPORT'
 const mockedUsers: IUser[] = [
   {
     id: 0,
+    email: 'test0@gmail.com',
     fullname: 'Виктор Викторов Викторович',
     department: 'Продажи',
     position: 'Начальник',
@@ -13,6 +14,7 @@ const mockedUsers: IUser[] = [
   },
   {
     id: 1,
+    email: 'test1@gmail.com',
     fullname: 'Иван Иванов Иванович',
     department: 'Продажи',
     position: 'Сотрудник',
@@ -20,6 +22,7 @@ const mockedUsers: IUser[] = [
   },
   {
     id: 3,
+    email: 'test3@gmail.com',
     fullname: 'Анна Анновна Анатольевна',
     department: 'Маркетинг',
     position: 'Начальник',
@@ -27,6 +30,7 @@ const mockedUsers: IUser[] = [
   },
   {
     id: 4,
+    email: 'test4@gmail.com',
     fullname: 'Юлия Юльевна Юрьевна',
     department: 'Маркетинг',
     position: 'Сотрудник',
@@ -36,6 +40,7 @@ const mockedUsers: IUser[] = [
 
 const currentUser = {
   id: 5,
+  email: 'denis.basenko@gmail.com',
   fullname: 'Денис Басенко Сергеевич',
   department: 'Разработка',
   position: 'Администратор',
@@ -58,8 +63,8 @@ const Users: FC<IUserssProps> = props => {
   const filterForUser = (user: IUser) => {
     const searchLowerCase = search.toLowerCase()
     return (
-      user.fullname.toLowerCase().includes(searchLowerCase) ||
-      user.department.toLowerCase().includes(searchLowerCase) ||
+      (user.fullname.toLowerCase().includes(searchLowerCase) ||
+        user.department.toLowerCase().includes(searchLowerCase)) &&
       user.id !== currentUser.id
     )
   }

@@ -65,7 +65,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(!isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>
