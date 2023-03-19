@@ -1,8 +1,10 @@
 import { IUser } from 'types/EXPORT'
 import { useLocalStorage } from './useLocalStorage'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { ILoginForm } from 'pages/Login/components/LoginForm'
 import { AxiosInstance } from 'utils/EXPORT'
+import { redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
@@ -36,6 +38,7 @@ const useAuth = () => {
         // useLocalStorage('user', data)
         cookies.set('Authentication', decodeURI(data.headers.authentication), { path: '/' })
         cookies.set('Refresh', decodeURI(data.headers.refresh), { path: '/' })
+        window.location.reload()
       })
   }
 

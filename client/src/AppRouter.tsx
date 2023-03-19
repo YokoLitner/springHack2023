@@ -51,7 +51,7 @@ export const publicRouter: IRoute[] = [
 ]
 
 const AppRouter = () => {
-  const { isAuth } = useAuth()
+  const auth = useAuth()
   const loading = false
 
   if (loading) {
@@ -61,7 +61,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(auth.isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>
