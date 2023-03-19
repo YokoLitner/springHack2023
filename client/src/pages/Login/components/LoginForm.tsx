@@ -11,7 +11,8 @@ import { Input } from 'components/EXPORT'
 
 // hooks
 import useAuth from 'hooks/useAuth'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import fetchUserById from 'utils/fetchUserById'
 
 export interface ILoginForm {
   email: string
@@ -25,8 +26,8 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm({
     defaultValues: {
-      email: '',
-      password: ''
+      email: '123456',
+      password: 'Qwerty12345'
     },
     resolver: yupResolver(schema)
   })
