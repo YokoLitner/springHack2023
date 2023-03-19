@@ -1,12 +1,7 @@
-import axios from 'axios'
+import { AxiosInstance } from './EXPORT'
 
 const fetchAllUsers = async () => {
-  const res = axios.get('http://localhost:3000/user', {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    }
-  })
+  const res = AxiosInstance.get('user')
   return (await res).data
 }
 

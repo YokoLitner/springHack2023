@@ -1,13 +1,8 @@
 import { IUser } from 'types/EXPORT'
-import axios from 'axios'
+import { AxiosInstance } from 'utils/EXPORT'
 
 const fetchCurrentUser = async () => {
-  const { data } = await axios.get<IUser>('http://localhost:3000/authentication', {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    }
-  })
+  const { data } = await AxiosInstance.get<IUser>('authentication')
   return await data
 }
 
