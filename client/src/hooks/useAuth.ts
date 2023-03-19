@@ -17,12 +17,10 @@ const useAuth = () => {
           Accept: 'application/json'
         }
       })
-      .catch(error => {
-        console.log(error)
+      .catch(() => {
         setIsAuth(false)
       })
       .then(response => {
-        console.log(response)
         response ? setIsAuth(true) : setIsAuth(false)
       })
   }

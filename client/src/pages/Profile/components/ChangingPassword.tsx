@@ -1,21 +1,22 @@
 import { Controller, useForm } from 'react-hook-form'
-import { Input } from 'components/EXPORT'
 import { SubmitHandler } from 'react-hook-form/dist/types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import schema from './schema'
 
-interface IFormInput {
+// components
+import { Input } from 'components/EXPORT'
+
+// utils
+import changePassword from 'utils/changePassword'
+
+export interface IPasswordForm {
   currentPassword: string
   newPassword: string
   confirmNewPassword: string
 }
 
 const ChangingPassword = () => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors }
-  } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       currentPassword: '',
       newPassword: '',
@@ -24,7 +25,7 @@ const ChangingPassword = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit: SubmitHandler<IFormInput> = data => console.log(data)
+  const onSubmit: SubmitHandler<IPasswordForm> = data => changePassword(data)
 
   return (
     <div className="mt-8">

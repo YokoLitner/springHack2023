@@ -21,6 +21,7 @@ const passwordSchema = yup
       .required(REQUIRED_MSG)
       // @ts-ignore
       .oneOf([yup.ref('newPassword'), null], 'Пароли не совпадают')
+      .notOneOf([yup.ref('currentPassword'), null], 'Пароль должен быть новым')
   })
   .required()
 
