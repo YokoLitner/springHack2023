@@ -8,10 +8,14 @@ import {
   Post,
   Body,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
 import FindOneParams from 'src/internal/utils/findOneParams';
+import RoleGuard from '../authentication/guards/role.guard';
+import changePasswordDto from './dto/changePassword.dto';
 import CreateUserDto from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import Role from './types/role.enum';
 
 import { UserService } from './user.service';
 
@@ -31,6 +35,7 @@ export class UserController {
   }
 
   @Post()
+  @UseGuards(RoleGuard(Role.Admin))
   async createUser(@Body() createUserDto: CreateUserDto) {
     return await this.userService.create(createUserDto);
   }
@@ -46,5 +51,10 @@ export class UserController {
   @Delete(':id')
   remove(@Param() { id }: FindOneParams) {
     return this.userService.delete(Number(id));
+  }
+
+  @Post('/change-password')
+  async updatePassword(@Body() changePassword: changePasswordDto) {
+    return await this.userService.changePassword(changePassword);
   }
 }

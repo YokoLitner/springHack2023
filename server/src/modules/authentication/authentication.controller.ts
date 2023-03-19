@@ -5,14 +5,12 @@ import {
   HttpCode,
   Post,
   UseGuards,
-  Res,
   Get,
 } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dto/register.dto';
 import RequestWithUser from './interfaces/requestWithUser.interface';
 import { LocalAuthenticationGuard } from './guards/localAuthentication.guard';
-import { Response } from 'express';
 import JwtAuthenticationGuard from './guards/jwt-authentication.guard';
 import { UserService } from '../user/user.service';
 import JwtRefreshGuard from './guards/jwt-refresh.guard';
