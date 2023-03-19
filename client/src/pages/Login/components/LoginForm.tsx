@@ -35,9 +35,9 @@ const LoginForm = () => {
 
   const { login } = useAuth()
 
-  const onSubmit: SubmitHandler<ILoginForm> = data => {
-    login(data).then(data => {
-      if (data.message) {
+  const onSubmit: SubmitHandler<ILoginForm> = loginData => {
+    login(loginData).then((data: any) => {
+      if (data && data.message) {
         setError(true)
       }
     })
