@@ -1,48 +1,49 @@
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ILoginForm } from 'pages/Login/components/LoginForm'
-import { IRegistrationForm } from 'pages/Registration/components/RegistrationForm'
 
 const useAuth = () => {
-  const isAuth = () => {
-    // axios.get('http://localhost:3000/authentication', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json'
-    //   }
-    // })
-    return false
-  }
+  const [isAuth, setIsAuth] = useState(false)
 
-  const register = (data: IRegistrationForm) => {
-    axios.post(
-      'http://localhost:3000/authentication/register',
-      {
-        ...data,
-        email: data.email + '@gmail.com'
-      },
-      {
+  useEffect(() => {
+    checkIsAuth()
+  }, [])
+
+  const checkIsAuth = async () => {
+    await axios
+      .get('http://localhost:3000/authentication', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json'
         }
-      }
-    )
+      })
+      .catch(() => {
+        setIsAuth(false)
+      })
+      .then(data => {
+        data ? setIsAuth(true) : setIsAuth(false)
+      })
   }
 
   const login = (data: ILoginForm) => {
-    axios.post(
-      'http://localhost:3000/authentication/log-in',
-      {
-        ...data,
-        email: data.email + '@gmail.com'
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
+    const res = axios
+      .post(
+        'http://localhost:3000/authentication/log-in',
+        {
+          ...data,
+          email: data.email + '@gmail.com'
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          }
         }
-      }
-    )
+      )
+      .catch(error => {
+        return error
+      })
+    return res
   }
 
   const logout = (id: number) => {
@@ -57,7 +58,7 @@ const useAuth = () => {
     })
   }
 
-  return { isAuth: isAuth(), register, login, logout }
+  return { isAuth, login, logout }
 }
 
 export default useAuth

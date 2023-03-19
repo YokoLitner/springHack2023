@@ -11,6 +11,7 @@ import { Input } from 'components/EXPORT'
 
 // hooks
 import useAuth from 'hooks/useAuth'
+import { useState } from 'react'
 
 export interface ILoginForm {
   email: string
@@ -30,9 +31,17 @@ const LoginForm = () => {
     resolver: yupResolver(schema)
   })
 
+  const [error, setError] = useState(false)
+
   const { login } = useAuth()
 
-  const onSubmit: SubmitHandler<ILoginForm> = data => login(data)
+  const onSubmit: SubmitHandler<ILoginForm> = data => {
+    login(data).then(data => {
+      if (data.message) {
+        setError(true)
+      }
+    })
+  }
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -70,10 +79,8 @@ const LoginForm = () => {
           />
         )}
       />
+      {error && <div className="text-sm text-red-500 mt-1">Неверный логи или пароль</div>}
       <button className="mb-4 h-12 mt-16 bg-blue-600 text-white rounded-lg font-medium">Войти</button>
-      <Link to="/" className="w-fit mx-auto">
-        <button className="text-blue-600">Зарегистрироваться</button>
-      </Link>
     </form>
   )
 }
