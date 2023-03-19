@@ -1,15 +1,8 @@
+import { MAX_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
 import * as yup from 'yup'
 
 const PASS_MSG =
   'Должен содержать минимум 8 символов, обязательной заглавной буквой, обязательной  цифрой или спецсимволом'
-const REQUIRED_MSG = 'Это поле обязательно'
-const MIN_LENGTH = (minLength: number) => {
-  return [minLength, `Минимальная длина ${minLength}`]
-}
-
-const MAX_LENGTH = (maxLength: number) => {
-  return [maxLength, `Максимальная длина ${maxLength}`]
-}
 
 const passwordSchema = yup
   .object({
@@ -26,6 +19,7 @@ const passwordSchema = yup
     confirmNewPassword: yup
       .string()
       .required(REQUIRED_MSG)
+      // @ts-ignore
       .oneOf([yup.ref('newPassword'), null], 'Пароли не совпадают')
   })
   .required()

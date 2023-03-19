@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AccessLevels } from 'types/EXPORT'
@@ -12,6 +12,7 @@ import { ArrowIcon } from 'assets/icons/EXPORT'
 // components
 import { Input } from 'components/EXPORT'
 import ChangingPassword from './components/ChangingPassword'
+import { MAX_LENGTH, MIN_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
 
 const currentUser = {
   id: 5,
@@ -20,14 +21,6 @@ const currentUser = {
   position: 'Администратор',
   access_level: 'admin',
   currentPassword: 'Fofa56Yy'
-}
-
-const REQUIRED_MSG = 'Это поле обязательно'
-const MIN_LENGTH = (minLength: number): [number, string] => {
-  return [minLength, `Минимальная длина ${minLength}`]
-}
-const MAX_LENGTH = (maxLength: number): [number, string] => {
-  return [maxLength, `Максимальная длина ${maxLength}`]
 }
 
 const schema = yup
@@ -54,7 +47,6 @@ const schema = yup
 const Profile = () => {
   const [isChanging, setIsChanging] = useState(false)
   const [isChangingPassword, setIsChangingPassword] = useState(false)
-  const params = useParams()
   const navigate = useNavigate()
   const { handleSubmit, control } = useForm({
     defaultValues: currentUser,
