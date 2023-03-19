@@ -1,3 +1,5 @@
+import { IUser } from 'types/EXPORT'
+import { useLocalStorage } from './useLocalStorage'
 import { useEffect, useState } from 'react'
 import { ILoginForm } from 'pages/Login/components/LoginForm'
 import { AxiosInstance } from 'utils/EXPORT'
@@ -19,13 +21,18 @@ const useAuth = () => {
       })
   }
 
-  const login = (data: ILoginForm) => {
-    const res = AxiosInstance.post('authentication/log-in', {
+  const login = async (data: ILoginForm) => {
+    const res = await AxiosInstance.post<IUser>('authentication/log-in', {
       ...data,
       email: data.email + '@gmail.com'
-    }).catch(error => {
-      return error
     })
+      .catch(error => {
+        return error
+      })
+      .then((data: IUser) => {
+        useLocalStorage('userId', data.id)
+        useLocalStorage('user', data)
+      })
     return res
   }
 
