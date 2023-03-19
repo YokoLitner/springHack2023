@@ -14,6 +14,7 @@ class User {
   public fullname: string;
 
   @Column()
+  @Exclude()
   public password: string;
 
   @Column({ nullable: true })

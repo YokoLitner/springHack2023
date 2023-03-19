@@ -5,6 +5,7 @@ import User from './user.entity';
 import CreateUserDto from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import * as bcrypt from 'bcrypt';
+import changePasswordDto from './dto/changePassword.dto';
 
 @Injectable()
 export class UserService {
@@ -58,7 +59,9 @@ export class UserService {
       ...restUpdateUser,
     };
 
-    await this.userRepository.save(updatedUserData);
+    const updatedUser = await this.userRepository.save(updatedUserData);
+    updatedUser.password = undefined;
+    return updatedUser;
   }
 
   async delete(id: number) {
@@ -67,6 +70,26 @@ export class UserService {
       throw new HttpException(
         `User with id ${id} not found`,
         HttpStatus.NOT_FOUND,
+      );
+    }
+  }
+
+  async changePassword(changePassword: changePasswordDto) {
+    const user = await this.getById(changePassword.id);
+    const isPasswordMatching = await bcrypt.compare(
+      changePassword.currentPassword,
+      user.password,
+    );
+    if (isPasswordMatching) {
+      const hashedPassword = await bcrypt.hash(changePassword.newPassword, 10);
+      return this.update(changePassword.id, {
+        ...user,
+        password: hashedPassword,
+      });
+    } else {
+      throw new HttpException(
+        `Сurrent password is incorrect`,
+        HttpStatus.FORBIDDEN,
       );
     }
   }

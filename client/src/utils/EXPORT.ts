@@ -1,1 +1,6 @@
 export { default as getFormatedTime } from './getFormatedTime'
+export { default as fetchUserById } from './fetchUserById'
+export { default as fetchCurrentUser } from './fetchCurrentUser'
+export { default as changePassword } from './changePassword'
+export { default as AxiosInstance } from './axios'
+export * from './errorMsgs'

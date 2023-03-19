@@ -4,10 +4,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Loader } from 'components/EXPORT'
 
 // pages
-import { Chat, Error, Login, Profile, Registration, Home } from 'pages/EXPORT'
+import { Chat, Error, Home, Login, Profile } from 'pages/EXPORT'
 
 // types
 import { IRoute } from 'types/routes'
+
+// hooks
+import useAuth from 'hooks/useAuth'
 
 export const privateRouter = [
   {
@@ -39,10 +42,6 @@ export const privateRouter = [
 export const publicRouter: IRoute[] = [
   {
     path: '/',
-    element: <Registration />
-  },
-  {
-    path: '/login',
     element: <Login />
   },
   {
@@ -52,7 +51,7 @@ export const publicRouter: IRoute[] = [
 ]
 
 const AppRouter = () => {
-  const user = false
+  const auth = useAuth()
   const loading = false
 
   if (loading) {
@@ -62,7 +61,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {(user ? privateRouter : publicRouter).map(({ path, element }) => (
+        {(auth.isAuth ? privateRouter : publicRouter).map(({ path, element }) => (
           <Route path={path} element={element} key={path} />
         ))}
       </Routes>

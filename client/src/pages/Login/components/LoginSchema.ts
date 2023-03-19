@@ -1,9 +1,8 @@
 import * as yup from 'yup'
 
-const REQUIRED_MSG = 'Это поле обязательно'
-const MAX_LENGTH = (maxLength: number) => {
-  return [maxLength, `Максимальная длина ${maxLength}`]
-}
+// utils
+import { MAX_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
+
 const EMAIL_ERROR_MSG = 'Почта не должна содержать @'
 const PASS_ERROR_MSG =
   'Должен содержать минимум 8 символов, обязательной заглавной буквой, обязательной  цифрой или спецсимволом'
@@ -23,8 +22,6 @@ const schema = yup
       .string()
       .required(REQUIRED_MSG)
       .matches(PASS_REGEX, PASS_ERROR_MSG)
-      //TODO fix ts
-      //@ts-ignore
       .max(...MAX_LENGTH(20))
   })
   .required()

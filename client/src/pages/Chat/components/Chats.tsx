@@ -5,9 +5,11 @@ import cls from 'classnames'
 
 // types
 import { IChat } from 'types/EXPORT'
+
+// utils
 import getFormatedTime from 'utils/getFormatedTime'
 
-const mockedChats: IChat[] = [
+export const mockedChats: IChat[] = [
   {
     id: 0,
     name: 'Чат продаж',
@@ -23,6 +25,7 @@ const mockedChats: IChat[] = [
     users: [
       {
         id: 0,
+        email: 'test0@gmail.com',
         fullname: 'Виктор Викторов Викторович',
         department: 'Продажи',
         position: 'Начальник',
@@ -30,6 +33,7 @@ const mockedChats: IChat[] = [
       },
       {
         id: 1,
+        email: 'test1@gmail.com',
         fullname: 'Иван Иванов Иванович',
         department: 'Продажи',
         position: 'Сотрудник',
@@ -45,13 +49,14 @@ const mockedChats: IChat[] = [
         id: 0,
         content: 'Круто!',
         created_at: new Date(),
-        sender_id: 3,
+        sender_id: 5,
         type: 'text'
       }
     ],
     users: [
       {
         id: 3,
+        email: 'test3@gmail.com',
         fullname: 'Анна Анновна Анатольевна',
         department: 'Маркетинг',
         position: 'Начальник',
@@ -59,6 +64,7 @@ const mockedChats: IChat[] = [
       },
       {
         id: 4,
+        email: 'test4@gmail.com',
         fullname: 'Юлия Юльевна Юрьевна',
         department: 'Маркетинг',
         position: 'Сотрудник',

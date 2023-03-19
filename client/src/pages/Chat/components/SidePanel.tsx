@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Chats from './Chats'
 import { useParams } from 'react-router-dom'
+import Chats from './Chats'
 import Users from './Users'
 
 import cls from 'classnames'
@@ -15,13 +15,13 @@ const SidePanel = () => {
 
   return (
     <div
-      className={cls('sm:flex flex-col h-screen w-full sm:w-1/4 bg-gray-100 ', {
+      className={cls('sm:flex flex-col h-screen w-full sm:w-1/4 bg-gray-100', {
         hidden: Object.entries(params).length !== 0
       })}
     >
       <div className="pb-5 border-b px-3">
         <input
-          className="w-full mt-5 h-10 bg-gray-200 rounded-lg outline-none px-3 placeholder-shown:text-center"
+          className="w-full h-10 bg-gray-200 rounded-lg outline-none px-3 placeholder-shown:text-center"
           type="text"
           placeholder="Поиск"
           value={search}

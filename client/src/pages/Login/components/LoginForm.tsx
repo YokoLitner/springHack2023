@@ -9,7 +9,12 @@ import cls from 'classnames'
 // components
 import { Input } from 'components/EXPORT'
 
-interface ILoginForm {
+// hooks
+import useAuth from 'hooks/useAuth'
+import { useEffect, useState } from 'react'
+import fetchUserById from 'utils/fetchUserById'
+
+export interface ILoginForm {
   email: string
   password: string
 }
@@ -21,13 +26,23 @@ const LoginForm = () => {
     formState: { errors }
   } = useForm({
     defaultValues: {
-      email: '',
-      password: ''
+      email: '123456',
+      password: 'Qwerty12345'
     },
     resolver: yupResolver(schema)
   })
 
-  const onSubmit: SubmitHandler<ILoginForm> = data => console.log(data)
+  const [error, setError] = useState(false)
+
+  const { login } = useAuth()
+
+  const onSubmit: SubmitHandler<ILoginForm> = loginData => {
+    login(loginData).then((data: any) => {
+      if (data && data.message) {
+        setError(true)
+      }
+    })
+  }
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -65,10 +80,8 @@ const LoginForm = () => {
           />
         )}
       />
+      {error && <div className="text-sm text-red-500 mt-1">Неверный логи или пароль</div>}
       <button className="mb-4 h-12 mt-16 bg-blue-600 text-white rounded-lg font-medium">Войти</button>
-      <Link to="/" className="w-fit mx-auto">
-        <button className="text-blue-600">Зарегистрироваться</button>
-      </Link>
     </form>
   )
 }

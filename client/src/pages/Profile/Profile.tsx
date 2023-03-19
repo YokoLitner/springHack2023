@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AccessLevels } from 'types/EXPORT'
@@ -11,17 +11,16 @@ import { ArrowIcon } from 'assets/icons/EXPORT'
 
 // components
 import { Input } from 'components/EXPORT'
-
-// utils
+import ChangingPassword from './components/ChangingPassword'
 import { MAX_LENGTH, MIN_LENGTH, REQUIRED_MSG } from 'utils/errorMsgs'
-import fetchUserById from 'utils/fetchUserById'
 
 const currentUser = {
   id: 5,
-  fullname: 'Басенко Денис Сергеевич',
+  fullname: 'Денис Басенко Сергеевич',
   department: 'Разработка',
   position: 'Администратор',
-  access_level: 'admin'
+  access_level: 'admin',
+  currentPassword: 'Fofa56Yy'
 }
 
 const schema = yup
@@ -47,24 +46,14 @@ const schema = yup
 
 const Profile = () => {
   const [isChanging, setIsChanging] = useState(false)
-  const [userInfo, setUserInfo] = useState(currentUser)
-  const params = useParams()
-
-  useEffect(() => {
-    if (Object.entries(params).length !== 0) {
-      fetchUserById(Number(params.id)).then(data => {
-        setUserInfo(data)
-      })
-    }
-  }, [params])
-
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
   const navigate = useNavigate()
   const { handleSubmit, control } = useForm({
-    defaultValues: userInfo,
+    defaultValues: currentUser,
     resolver: yupResolver(schema)
   })
 
-  const name = userInfo.fullname.split(' ')[1]
+  const name = currentUser.fullname.split(' ')[0]
 
   const goBack = () => navigate(-1)
 
@@ -73,14 +62,14 @@ const Profile = () => {
   const changeAvatar = () => console.log('avatar changed')
 
   return (
-    <div className="flex flex-row h-screen max-[960px]:h-full">
+    <div className="flex flex-row">
       <div
         onClick={goBack}
         className="hidden items-center h-screen border-r sm:flex px-5 bg-gray-100 cursor-pointer hover:bg-gray-200"
       >
         <ArrowIcon width="35px" className="rotate-180 fill-blue-600" />
       </div>
-      <div className="flex justify-center w-full items-center max-[960px]:flex-col">
+      <div className="flex justify-center w-full items-center my-3">
         <div onClick={goBack} className="hidden mr-[80%] p-5 max-[639px]:block">
           <ArrowIcon width="35px" className="rotate-180 fill-blue-600 hidden max-[639px]:block" />
         </div>
@@ -97,7 +86,7 @@ const Profile = () => {
                 <Controller
                   name="fullname"
                   control={control}
-                  defaultValue={userInfo.fullname}
+                  defaultValue={currentUser.fullname}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -109,7 +98,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{userInfo.fullname}</div>
+                <div className="text-gray-400">{currentUser.fullname}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -118,7 +107,7 @@ const Profile = () => {
                 <Controller
                   name="department"
                   control={control}
-                  defaultValue={userInfo.department}
+                  defaultValue={currentUser.department}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -130,7 +119,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{userInfo.department ?? 'Не выбран'}</div>
+                <div className="text-gray-400">{currentUser.department}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -139,7 +128,7 @@ const Profile = () => {
                 <Controller
                   name="position"
                   control={control}
-                  defaultValue={userInfo.position}
+                  defaultValue={currentUser.position}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -151,7 +140,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{userInfo.position ?? 'Не выбрана'}</div>
+                <div className="text-gray-400">{currentUser.position}</div>
               )}
             </div>
             <div className="flex flex-row w-full pb-3 mt-3 border-b justify-between">
@@ -160,7 +149,7 @@ const Profile = () => {
                 <Controller
                   name="access_level"
                   control={control}
-                  defaultValue={userInfo.access_level}
+                  defaultValue={currentUser.access_level}
                   render={({ field: { onChange, value }, fieldState: { error } }) => (
                     <Input
                       value={value}
@@ -172,7 +161,7 @@ const Profile = () => {
                   )}
                 />
               ) : (
-                <div className="text-gray-400">{userInfo.access_level}</div>
+                <div className="text-gray-400">{currentUser.access_level}</div>
               )}
             </div>
             <div className="w-full pb-2 border-b text-blue-600 font-medium mt-20 flex-row flex">
@@ -186,9 +175,13 @@ const Profile = () => {
               )}
             </div>
           </form>
-          <div onClick={() => null} className="w-full py-2 text-blue-600 font-medium cursor-pointer">
-            Изменить пароль
+          <div
+            onClick={() => setIsChangingPassword(!isChangingPassword)}
+            className="w-full py-2 text-blue-600 font-medium cursor-pointer"
+          >
+            {isChangingPassword ? 'Отменить' : 'Сменить пароль'}
           </div>
+          {isChangingPassword && <ChangingPassword />}
         </div>
       </div>
     </div>
