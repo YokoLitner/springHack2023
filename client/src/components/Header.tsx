@@ -1,7 +1,7 @@
-import { Link, useLocation, useParams } from 'react-router-dom'
-import { BsChat } from 'react-icons/bs'
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { BsFillChatFill, BsChat } from 'react-icons/bs'
 import { AiOutlineHome } from 'react-icons/ai'
-// import { Avatar } from '@mui/material'
 
 const Header = () => {
   const { pathname } = useLocation()
@@ -19,7 +19,10 @@ const Header = () => {
       </div>
       <Link to={isMainPage ? '/chat' : '/'}>
         {isMainPage ? (
-          <BsChat size={'40px'} className="fill-blue-600" />
+          <div className="flex">
+            <BsChat size={'40px'} className="fill-blue-600" />
+            <div className="w-4 h-4 rounded-[50%] bg-blue-600 text-white text-[12px] text-center">{1}</div>
+          </div>
         ) : (
           <AiOutlineHome className="fill-blue-600" size={'40px'} />
         )}

@@ -19,7 +19,7 @@ export interface ILoginForm {
   password: string
 }
 
-const LoginForm = () => {
+const LoginForm = (props: any) => {
   const {
     handleSubmit,
     control,

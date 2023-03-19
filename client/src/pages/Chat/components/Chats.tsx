@@ -16,9 +16,18 @@ export const mockedChats: IChat[] = [
     messages: [
       {
         id: 0,
-        content: 'afafaaf afafafafa242 fafaaafa 22422 afa a89 afaua 787 afhjah 897a8a jhafjfa 8787 afhahkja 8af87',
+        content:
+          'afafaaf afafafafa242 fafaaafa 22422 afa a89 afaua 787 afhjah 897a8a jhafjfa 8787 afhahkja 8af87 kjn kjn jkn jn kj jknjkn jknjknjknj kjnknkjnkjn kjnkjnjkn kjnkjnkj nkjnkjn jkn kjn jkn jknjknkjn kjnkjnjknkj nknkjn',
         created_at: new Date(999999),
         sender_id: 1,
+        type: 'text'
+      },
+      {
+        id: 0,
+        content:
+          'afafaaf afafafafa242 fafaaafa 22422 afa a89 afaua 787 afhjah 897a8a jhafjfa 8787 afhahkja 8af87 kjn kjn jkn jn kj jknjkn jknjknjknj kjnknkjnkjn kjnkjnjkn kjnkjnkj nkjnkjn jkn kjn jkn jknjknkjn kjnkjnjknkj nknkjn',
+        created_at: new Date(999999),
+        sender_id: 5,
         type: 'text'
       }
     ],
