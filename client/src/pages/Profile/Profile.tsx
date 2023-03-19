@@ -65,13 +65,13 @@ const Profile = () => {
     <div className="flex flex-row">
       <div
         onClick={goBack}
-        className="hidden items-center h-screen border-r sm:flex px-5 bg-gray-100 cursor-pointer hover:bg-gray-200"
+        className="hidden items-center h-[100vh] border-r sm:flex px-5 bg-gray-100 cursor-pointer hover:bg-gray-200"
       >
         <ArrowIcon width="35px" className="rotate-180 fill-blue-600" />
       </div>
-      <div className="flex justify-center w-full items-center my-3">
-        <div onClick={goBack} className="hidden mr-[80%] p-5 max-[639px]:block">
-          <ArrowIcon width="35px" className="rotate-180 fill-blue-600 hidden max-[639px]:block" />
+      <div className="flex justify-center w-full sm:items-center my-3">
+        <div onClick={goBack} className="sm:hidden max-[639px]:block">
+          <ArrowIcon width="35px" className="rotate-180 fill-blue-600" />
         </div>
         <div className="sm:w-[550px] w-64">
           <div

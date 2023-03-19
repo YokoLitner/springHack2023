@@ -15,7 +15,7 @@ const SidePanel = () => {
 
   return (
     <div
-      className={cls('sm:flex flex-col h-screen w-full sm:w-1/4 bg-gray-100', {
+      className={cls('lg:flex flex-col h-screen w-1/4 max-lg:w-[100vh] bg-gray-100', {
         hidden: Object.entries(params).length !== 0
       })}
     >

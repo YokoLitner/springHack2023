@@ -39,7 +39,7 @@ export class AuthenticationController {
 
     await this.userService.setCurrentRefreshToken(refreshToken, user.id);
     //request.res.setHeader('Host', 'http://localhost:5173/');
-    request.res.setHeader('Host', 'https://springhack2023.ru');
+    // request.res.setHeader('Host', 'https://springhack2023.ru');
     request.res.setHeader('Authentication', accessToken);
     request.res.setHeader('Refresh', refreshToken);
     request.res.setHeader('Set-Cookie', [
