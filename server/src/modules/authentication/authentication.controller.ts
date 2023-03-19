@@ -32,16 +32,23 @@ export class AuthenticationController {
   @Post('log-in')
   async logIn(@Req() request: RequestWithUser) {
     const { user } = request;
-    const accessTokenCookie =
+    const { cookie: accessTokenCookie, token: accessToken } =
       this.authenticationService.getCookieWithJwtAccessToken(user.id);
     const { cookie: refreshTokenCookie, token: refreshToken } =
       this.authenticationService.getCookieWithJwtRefreshToken(user.id);
 
     await this.userService.setCurrentRefreshToken(refreshToken, user.id);
-
+    //request.res.setHeader('Host', 'http://localhost:5173/');
+    // request.res.setHeader('Host', 'https://springhack2023.ru');
+    request.res.setHeader('Authentication', accessToken);
+    request.res.setHeader('Refresh', refreshToken);
     request.res.setHeader('Set-Cookie', [
       accessTokenCookie,
       refreshTokenCookie,
+    ]);
+    request.res.setHeader('Access-Control-Expose-Headers', [
+      'Authentication',
+      'Refresh',
     ]);
     return user;
   }
@@ -68,7 +75,7 @@ export class AuthenticationController {
   @UseGuards(JwtRefreshGuard)
   @Get('refresh')
   refresh(@Req() request: RequestWithUser) {
-    const accessTokenCookie =
+    const { cookie: accessTokenCookie } =
       this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
 
     request.res.setHeader('Set-Cookie', accessTokenCookie);

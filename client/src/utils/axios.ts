@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
-
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 /**
  * Core axios instance
  * */
@@ -9,7 +10,9 @@ const axiosInstance = axios.create({
   // withCredentials: true, // TODO on
   headers: {
     'Content-Type': 'application/json',
-    Accept: 'application/json'
+    Accept: 'application/json',
+    Authentication: cookies.get('Authentication'),
+    Refresh: cookies.get('Refresh')
   }
 }) as AxiosInstance & { sleep: (ms: number) => Promise<void> }
 

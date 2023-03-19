@@ -3,6 +3,8 @@ import { useLocalStorage } from './useLocalStorage'
 import { useEffect, useState } from 'react'
 import { ILoginForm } from 'pages/Login/components/LoginForm'
 import { AxiosInstance } from 'utils/EXPORT'
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 
 const useAuth = () => {
   const [isAuth, setIsAuth] = useState(false)
@@ -29,11 +31,12 @@ const useAuth = () => {
       .catch(error => {
         return error
       })
-      .then((data: IUser) => {
-        useLocalStorage('userId', data.id)
-        useLocalStorage('user', data)
+      .then((data: any) => {
+        // useLocalStorage('userId', data.id)
+        // useLocalStorage('user', data)
+        cookies.set('Authentication', decodeURI(data.headers.authentication), { path: '/' })
+        cookies.set('Refresh', decodeURI(data.headers.refresh), { path: '/' })
       })
-    return res
   }
 
   const logout = (id: number) => {
